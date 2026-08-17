@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Secure Notes</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header>
+  <h1>Secure Notes</h1>
+  <div id="session-info"></div>
+</header>
+
+<nav id="tabs">
+  <button data-tab="auth">Login / Register</button>
+  <button data-tab="notes">My Notes</button>
+  <button data-tab="admin-notes">All Notes (admin)</button>
+  <button data-tab="admin-users">Users (admin)</button>
+  <button data-tab="posts">Posts</button>
+  <button data-tab="agg-interests">Users by Interest</button>
+  <button data-tab="agg-userposts">User Posts (lookup)</button>
+</nav>
+
+<main>
+
+  <section id="tab-auth" class="tab">
+    <h2>Register</h2>
+    <form id="register-form">
+      <input name="name" placeholder="Name" required />
+      <input name="email" type="email" placeholder="Email" required />
+      <input name="password" type="password" placeholder="Password (min 8 chars)" required />
+      <input name="interests" placeholder="Interests, comma separated (e.g. chess,reading)" />
+      <button type="submit">Register</button>
+    </form>
+
+    <h2>Login</h2>
+    <form id="login-form">
+      <input name="email" type="email" placeholder="Email" required />
+      <input name="password" type="password" placeholder="Password" required />
+      <button type="submit">Login</button>
+    </form>
+    <button id="logout-btn" style="display:none">Logout</button>
+    <pre id="auth-output" class="output"></pre>
+  </section>
+
+  <section id="tab-notes" class="tab">
+    <h2>My Notes</h2>
+    <form id="note-create-form">
+      <input name="title" placeholder="Title" required />
+      <textarea name="content" placeholder="Content" required></textarea>
+      <button type="submit">Add Note</button>
+    </form>
+    <div>
+      <button id="notes-prev">Prev</button>
+      <span id="notes-page-info"></span>
+      <button id="notes-next">Next</button>
+    </div>
+    <div id="notes-list"></div>
+  </section>
+
+  <section id="tab-admin-notes" class="tab">
+    <h2>All Notes (admin only)</h2>
+    <div>
+      <button id="admin-notes-prev">Prev</button>
+      <span id="admin-notes-page-info"></span>
+      <button id="admin-notes-next">Next</button>
+    </div>
+    <div id="admin-notes-list"></div>
+  </section>
+
+  <section id="tab-admin-users" class="tab">
+    <h2>Users (admin only)</h2>
+    <form id="user-create-form">
+      <input name="name" placeholder="Name" required />
+      <input name="email" type="email" placeholder="Email" required />
+      <input name="password" type="password" placeholder="Password" required />
+      <select name="role">
+        <option value="user">user</option>
+        <option value="admin">admin</option>
+      </select>
+      <input name="interests" placeholder="Interests, comma separated" />
+      <button type="submit">Add User</button>
+    </form>
+    <div>
+      <button id="users-prev">Prev</button>
+      <span id="users-page-info"></span>
+      <button id="users-next">Next</button>
+    </div>
+    <div id="users-list"></div>
+  </section>
+
+  <section id="tab-posts" class="tab">
+    <h2>Posts (visible to everyone)</h2>
+    <form id="post-create-form">
+      <input name="title" placeholder="Title" required />
+      <textarea name="content" placeholder="Content" required></textarea>
+      <button type="submit">Add Post</button>
+    </form>
+    <div id="posts-list"></div>
+  </section>
+
+  <section id="tab-agg-interests" class="tab">
+    <h2>Aggregation Scenario 1: Users Grouped by Interest</h2>
+    <button id="load-interests">Load</button>
+    <div id="interests-output"></div>
+  </section>
+
+  <section id="tab-agg-userposts" class="tab">
+    <h2>Aggregation Scenario 2: A User's Posts ($lookup)</h2>
+    <form id="userposts-form">
+      <input name="userId" placeholder="User ID" required />
+      <button type="submit">Load</button>
+    </form>
+    <div id="userposts-output"></div>
+  </section>
+
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
